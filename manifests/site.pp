@@ -13,7 +13,7 @@ node 'puppet-agent.local.pl' {
  file { "/etc/nginx/sites-available/default":
 	owner	=>	root,
 	group	=>	root,
-	mode	=>	666,
+	mode	=>	664,
 	source	=>	"puppet:///files/default",
  	require	=>	Package['nginx'],
  }
