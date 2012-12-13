@@ -2,7 +2,7 @@ node default {
  file { "/tmp/testmaster.txt":
 	owner	=>	root,
 	group	=>	root,
-	mode	=>	644,
+	mode	=>	444,
 	source	=>	"puppet:///files/test2.txt",
  }
 }
