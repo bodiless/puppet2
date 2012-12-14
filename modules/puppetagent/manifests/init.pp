@@ -1,7 +1,5 @@
 class puppetagent {
 
-#  node 'puppet-agent.local.pl' {
-
    package { 'nginx':
 	ensure	=>	installed,
    }
@@ -9,7 +7,7 @@ class puppetagent {
   file { "/etc/nginx/sites-available/default":
 	owner	=>	root,
 	group	=>	root,
-	mode	=>	664,
+	mode	=>	644,
 	source	=>	"puppet:///modules/puppetagent/default",
  	require	=>	Package['nginx'],
   }
@@ -32,6 +30,5 @@ class puppetagent {
 	enable	=>	false,
   }
 
-# }
 }
 
