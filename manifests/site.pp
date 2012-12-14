@@ -7,53 +7,34 @@ node default {
  }
 }
 node 'puppet-agent.local.pl' {
- package { 'nginx':
-	ensure	=>	installed,
+	include puppetagent
 }
- file { "/etc/nginx/sites-available/default":
-	owner	=>	root,
-	group	=>	root,
-	mode	=>	664,
-	source	=>	"puppet:///files/default",
- 	require	=>	Package['nginx'],
- }
-
- service { 'nginx':
-	ensure	=>	running,
-	enable	=>	true,
-	hasstatus =>	true,
-	hasrestart =>	true,
-	subscribe  =>	File['/etc/nginx/sites-available/default'],
- }
-
- cron { "run-puppet":
-	command	=>	"/usr/bin/puppet agent --onetime --no-daemonize",
-	minute	=>	['1-59'],
-}
-
- service { "puppet":
-	ensure	=>	stopped,
-	enable	=>	false,
-}
-
-}
-
-#site.pp
-
-#site.pp
-
-#file { "/etc/sudoers":
+# package { 'nginx':
+#	ensure	=>	installed,
+#}
+# file { "/etc/nginx/sites-available/default":
 #	owner	=>	root,
 #	group	=>	root,
-#	mode	=>	440,
+#	mode	=>	664,
+#	source	=>	"puppet:///files/default",
+# 	require	=>	Package['nginx'],
+# }
+#
+# service { 'nginx':
+#	ensure	=>	running,
+#	enable	=>	true,
+#	hasstatus =>	true,
+#	hasrestart =>	true,
+#	subscribe  =>	File['/etc/nginx/sites-available/default'],
+# }
+#
+# cron { "run-puppet":
+#	command	=>	"/usr/bin/puppet agent --onetime --no-daemonize",
+#	minute	=>	['1-59'],
 #}
 #
-#file { "/etc/test.txt":
-#	source	=>	puppet:///
-#	owner	=>	root,
-#	group	=>	hadrian,
-#	mode	=>	555,
+# service { "puppet":
+#	ensure	=>	stopped,
+#	enable	=>	false,
 #}
-#
-#
-#import "nodes"
+
